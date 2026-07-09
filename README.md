@@ -1,13 +1,20 @@
 # Smart Task Manager
 
-Full stack task manager app with Python FastAPI backend and React frontend.
+A full stack task management application built with Python FastAPI and React TypeScript.
 
 ## Features
-- User authentication
+- User authentication with JWT
 - Project management
-- Task management
+- Task management with full CRUD operations
+- Role-based access control
 
 ## Tech Stack
-- Backend: Python, FastAPI
-- Frontend: React, TypeScript
+**Backend:**
+- Python
+- FastAPI
+- SQLAlchemy
 
+**Frontend:**
+- React
+- TypeScript
+- Vite
