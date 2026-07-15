@@ -8,6 +8,7 @@ interface LoginResponse {
   token_type: string
   role: string
   full_name: string
+  user_id: number
 }
 
 export default function Login() {
@@ -25,7 +26,7 @@ export default function Login() {
         email,
         password
       })
-      setAuth(data.access_token, data.role, data.full_name)
+      setAuth(data.access_token, data.role, data.full_name, data.user_id)
       navigate('/tasks')
     } catch {
       setError('אימייל או סיסמה שגויים')

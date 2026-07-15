@@ -15,7 +15,7 @@ export default function Users() {
 
   const loadUsers = async () => {
     const { data } = await api.get<User[]>('/users/')
-    setUsers(data)
+    setUsers([...data].sort((a, b) => (a.role === 'admin' ? -1 : b.role === 'admin' ? 1 : 0)))
   }
 
   useEffect(() => { loadUsers() }, [])
@@ -61,7 +61,7 @@ export default function Users() {
                   <td><strong>{u.full_name}</strong></td>
                   <td>{u.email}</td>
                   <td><span className={`badge badge-${u.role}`}>{u.role}</span></td>
-                  <td><button className="btn-danger" onClick={() => handleDelete(u.user_id)}>🗑️ מחק</button></td>
+                  <td>{u.role === 'admin' ? '-' : <button className="btn-danger" onClick={() => handleDelete(u.user_id)}>🗑️ מחק</button>}</td>
                 </tr>
               ))}
             </tbody>

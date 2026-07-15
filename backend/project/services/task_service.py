@@ -5,15 +5,14 @@ from typing import Optional
 
 async def get_all_tasks(current_user: dict, status: Optional[str] = None, priority: Optional[int] = None, assigned_to: Optional[int] = None, title: Optional[str] = None):
     tasks = await tasks_crud.get_all_tasks()
-    if status:
-        tasks = [t for t in tasks if t["status"] == status]
-    if priority:
-        tasks = [t for t in tasks if t["priority"] == priority]
-    if assigned_to:
-        tasks = [t for t in tasks if t["assigned_to"] == assigned_to]
-    if title:
-        tasks = [t for t in tasks if title.lower() in t["title"].lower()]
-    return tasks
+
+    filters = [
+        lambda t: t["status"] == status if status else True,
+        lambda t: t["priority"] == priority if priority else True,
+        lambda t: t["assigned_to"] == assigned_to if assigned_to else True,
+        lambda t: title.lower() in t["title"].lower() if title else True,
+    ]
+    return list(filter(lambda t: all(f(t) for f in filters), tasks))
 
 
 async def get_my_tasks(current_user: dict):
@@ -47,6 +46,7 @@ async def update_task(task_id: int, update_data, current_user: dict):
     updates = update_data.model_dump(exclude_unset=True)
 
     if user_role == "admin":
+        updates.pop("assigned_to", None)
         await tasks_crud.update_task_fields(task_id, updates)
         return await get_task_by_id(task_id)
 

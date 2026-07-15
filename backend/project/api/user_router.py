@@ -34,7 +34,7 @@ async def login(user_data: UserCreate):
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid email or password.")
     token_payload = {"user_id": user["user_id"], "role": user["role"]}
     access_token = auth_service.create_access_token(data=token_payload)
-    return {"access_token": access_token, "token_type": "bearer", "role": user["role"], "full_name": user["full_name"]}
+    return {"access_token": access_token, "token_type": "bearer", "role": user["role"], "full_name": user["full_name"], "user_id": user["user_id"]}
 
 
 @router.get("/", response_model=List[UserResponse])

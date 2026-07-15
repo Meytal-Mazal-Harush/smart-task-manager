@@ -5,16 +5,20 @@ from ..dal.db_context import fetch_all, fetch_one, execute_query
 DB_PATH = os.path.join(os.path.dirname(__file__), '..', '..', 'database.db')
 
 
+TASK_QUERY = """SELECT t.*, u.full_name as assigned_name
+    FROM tasks t LEFT JOIN users u ON t.assigned_to = u.user_id"""
+
+
 async def get_all_tasks():
-    return await fetch_all("SELECT * FROM tasks")
+    return await fetch_all(TASK_QUERY)
 
 
 async def get_task_by_id(task_id: int):
-    return await fetch_one("SELECT * FROM tasks WHERE task_id = $1", task_id)
+    return await fetch_one(f"{TASK_QUERY} WHERE t.task_id = $1", task_id)
 
 
 async def get_tasks_by_user(user_id: int):
-    return await fetch_all("SELECT * FROM tasks WHERE assigned_to = $1", user_id)
+    return await fetch_all(f"{TASK_QUERY} WHERE t.assigned_to = $1", user_id)
 
 
 async def get_tasks_by_project(project_id: int):

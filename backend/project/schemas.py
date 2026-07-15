@@ -1,4 +1,4 @@
-from pydantic import BaseModel, EmailStr, Field
+from pydantic import BaseModel, ConfigDict, EmailStr, Field
 from datetime import date, datetime
 from typing import Optional, List
 
@@ -16,9 +16,7 @@ class UserCreate(UserBase):
 class UserResponse(UserBase):
     user_id: int
     role: str
-
-    class Config:
-        from_attributes = True # מאפשר ל-Pydantic לעבוד בקלות עם אובייקטים מה-DB
+    model_config = ConfigDict(from_attributes=True)
 
 # ==========================================
 # 2. סכמות עבור פרויקטים (Projects)
@@ -30,22 +28,13 @@ class ProjectBase(BaseModel):
 class ProjectCreate(ProjectBase):
     pass
 
-class ProjectResponse(ProjectBase):
-    project_id: int
-
-    class Config:
-        from_attributes = True
-
-class ProjectCreate(ProjectBase):
-    pass
-
-# הנה התוספת החדשה:
 class ProjectUpdate(BaseModel):
     name: Optional[str] = Field(None, min_length=2, max_length=100)
     description: Optional[str] = None
 
 class ProjectResponse(ProjectBase):
     project_id: int
+    model_config = ConfigDict(from_attributes=True)
 
 # ==========================================
 # 3. סכמות עבור משימות (Tasks)
@@ -74,9 +63,8 @@ class TaskResponse(TaskBase):
     approved: bool
     project_id: int
     assigned_to: Optional[int] = None
-
-    class Config:
-        from_attributes = True
+    assigned_name: Optional[str] = None
+    model_config = ConfigDict(from_attributes=True)
 
 # ==========================================
 # 4. סכמות עבור הערות (Comments)
@@ -90,6 +78,4 @@ class CommentResponse(BaseModel):
     user_id: int
     text: str
     created_at: datetime
-
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)
