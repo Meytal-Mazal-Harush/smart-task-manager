@@ -85,11 +85,20 @@ button {
 
 .btn-outline {
   background: transparent;
+  color: #333;
+  border: 1px solid #ccc;
+}
+
+.btn-outline:hover {
+  background: rgba(0,0,0,0.05);
+}
+
+.navbar .btn-outline {
   color: white;
   border: 1px solid rgba(255,255,255,0.5);
 }
 
-.btn-outline:hover {
+.navbar .btn-outline:hover {
   background: rgba(255,255,255,0.1);
 }
 
@@ -241,3 +250,26 @@ tbody tr:last-child td {
 .badge-closed { background: #eaf0fb; color: #1a5276; }
 .badge-admin { background: #fdebd0; color: #a04000; }
 .badge-developer { background: #e8f8f5; color: #117a65; }
+
+/* Modal */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal {
+  background: white;
+  border-radius: 12px;
+  padding: 28px;
+  width: 100%;
+  max-width: 420px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+}

@@ -2,7 +2,7 @@ from fastapi import APIRouter, HTTPException, status, Depends
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from ..dal import users_crud
 from ..services import user_service, auth_service
-from ..schemas import UserCreate, UserResponse
+from ..schemas import UserCreate, UserUpdate, UserResponse
 from typing import List
 
 router = APIRouter(prefix="/users", tags=["Users & Auth"])
@@ -20,7 +20,17 @@ async def register(user_data: UserCreate):
     existing_user = await users_crud.get_user_by_email(user_data.email)
     if existing_user:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Email is already registered.")
-    user_data.role = "developer"
+    await user_service.create_user(user_data)
+    return await users_crud.get_user_by_email(user_data.email)
+
+
+@router.post("/admin/add", response_model=UserResponse, status_code=status.HTTP_201_CREATED)
+async def admin_add_user(user_data: UserCreate, current_user: dict = Depends(get_current_user)):
+    if current_user.get("role") != "admin":
+        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Admins only.")
+    existing_user = await users_crud.get_user_by_email(user_data.email)
+    if existing_user:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Email is already registered.")
     await user_service.create_user(user_data)
     return await users_crud.get_user_by_email(user_data.email)
 
@@ -45,7 +55,7 @@ async def get_all_users(current_user: dict = Depends(get_current_user)):
 
 
 @router.put("/{user_id}", response_model=UserResponse)
-async def update_user(user_id: int, user_data: UserCreate, current_user: dict = Depends(get_current_user)):
+async def update_user(user_id: int, user_data: UserUpdate, current_user: dict = Depends(get_current_user)):
     if current_user.get("role") != "admin":
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Admins only.")
     await users_crud.update_user(user_id, user_data.full_name, user_data.email, user_data.role)

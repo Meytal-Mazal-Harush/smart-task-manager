@@ -8,7 +8,7 @@ async def get_user_by_id(user_id: int):
     return await fetch_one("SELECT user_id, full_name, email, role FROM users WHERE user_id = $1", user_id)
 
 async def get_user_by_email(email: str):
-    # פונקציה קריטית עבור שלב ההתחברות (Login) והצפנת הסיסמאות
+
     return await fetch_one("SELECT * FROM users WHERE email = $1", email)
 
 async def add_user(full_name: str, email: str, password_hash: str, role: str = 'developer'):
