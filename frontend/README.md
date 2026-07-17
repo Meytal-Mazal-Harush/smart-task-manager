@@ -1,32 +1,65 @@
-# React + TypeScript + Vite
+# Smart Task Manager
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+A full-stack task management application built with Python, FastAPI, React, and TypeScript. The system allows users to create, manage, and update tasks within projects, with role-based access control for administrators and developers.
 
-Currently, two official plugins are available:
+## Overview
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+Smart Task Manager is a web-based platform designed to help teams organize work efficiently. It provides a secure and structured environment for managing projects, tasks, users, and permissions.
 
-## React Compiler
+## Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### Admin Features
+- Create and manage projects
+- Create, update, and delete users
+- Assign roles and manage permissions
+- View all projects and tasks
+- Approve completed tasks
 
-## Expanding the Oxlint configuration
+### Developer Features
+- View assigned and personal tasks
+- Update task status
+- Add comments or notes to tasks
+- Search and filter tasks by title, priority, status, or assignee
 
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
+### General Features
+- Secure login and logout
+- JWT-based authentication
+- Password hashing and authorization
+- Task search and filtering
 
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
-```
+## Tech Stack
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+### Backend
+- Python
+- FastAPI
+- SQLAlchemy
+- Pydantic
+- JWT authentication
+
+### Frontend
+- React
+- TypeScript
+- Vite
+
+### Database
+- SQL database for users, projects, tasks, and comments
+
+## Project Goals
+
+This project was developed as a full-stack application demonstrating:
+- REST API development
+- Authentication and authorization
+- Database integration
+- Role-based access control
+- Clean architecture and structured backend logic
+
+## Installation
+
+1. Clone the repository
+2. Install backend dependencies
+3. Install frontend dependencies
+4. Run the backend server and frontend application
+
+## Summary
+
+Smart Task Manager provides a complete end-to-end task management experience with secure access, clear role-based functionality, and a modern web interface.
