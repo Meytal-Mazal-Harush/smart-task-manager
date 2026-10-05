@@ -6,6 +6,23 @@ A full-stack task management application built with Python, FastAPI, React, and 
 
 Smart Task Manager is a web-based platform designed to help teams organize work efficiently. It provides a secure and structured environment for managing projects, tasks, users, and permissions.
 
+## Screenshots
+
+### Login
+<img width="762" height="691" alt="image" src="https://github.com/user-attachments/assets/9ed25e17-d906-4000-8c1f-7e6b74d3e728" />
+
+
+### Developer View
+<img width="1906" height="782" alt="image" src="https://github.com/user-attachments/assets/59541180-eb05-4f39-834e-504b75c26c8b" />
+
+
+### Admin View & Task Management
+<img width="1907" height="785" alt="image" src="https://github.com/user-attachments/assets/e1991114-c409-4c1e-9988-04d66bfe8541" />
+
+
+### Admin User Management
+
+
 ## Features
 
 ### Admin Features
