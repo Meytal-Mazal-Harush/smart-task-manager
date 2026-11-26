@@ -1,6 +1,19 @@
-# Smart Task Manager
+<div align="center">
 
-A full-stack task management app with role-based access control, built with **FastAPI**, **React** and **TypeScript**.
+<h1>Smart Task Manager</h1>
+
+<p>A full-stack task management app with role-based access control, built with <b>FastAPI</b>, <b>React</b> and <b>TypeScript</b>.</p>
+
+<p>
+  <img src="https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=black" alt="React" />
+  <img src="https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white" alt="TypeScript" />
+  <img src="https://img.shields.io/badge/Vite-646CFF?logo=vite&logoColor=white" alt="Vite" />
+  <img src="https://img.shields.io/badge/FastAPI-009688?logo=fastapi&logoColor=white" alt="FastAPI" />
+  <img src="https://img.shields.io/badge/Python-3.12-3776AB?logo=python&logoColor=white" alt="Python" />
+  <img src="https://img.shields.io/badge/SQLite-003B57?logo=sqlite&logoColor=white" alt="SQLite" />
+</p>
+
+</div>
 
 Admins create projects and tasks and manage users. Developers take open tasks themselves, update their progress and add comments. Admins then approve completed work.
 
@@ -8,18 +21,44 @@ Built as the final assignment (seminar) of my Practical Software Engineering stu
 
 > The user interface is in **Hebrew (RTL)**.
 
-## Screenshots
+## Contents
 
-### Login
-<img width="762" alt="Login screen" src="https://github.com/user-attachments/assets/9ed25e17-d906-4000-8c1f-7e6b74d3e728" />
+- [Screenshots](#-screenshots)
+- [Features](#-features)
+- [Task Workflow](#-task-workflow)
+- [Tech Stack](#-tech-stack)
+- [Architecture](#-architecture)
+- [Getting Started](#-getting-started)
+- [Running Tests](#-running-tests)
+- [Data Analysis](#-data-analysis)
+- [Known Limitations & Future Improvements](#-known-limitations--future-improvements)
+- [What I Learned](#-what-i-learned)
+- [Author](#-author)
 
-### Developer View
-<img width="1906" alt="Task list as seen by a developer" src="https://github.com/user-attachments/assets/59541180-eb05-4f39-834e-504b75c26c8b" />
+## 📸 Screenshots
 
-### Admin View & Task Management
-<img width="1907" alt="Task list as seen by an admin" src="https://github.com/user-attachments/assets/e1991114-c409-4c1e-9988-04d66bfe8541" />
+<p align="center">
+  <img width="420" alt="Login screen" src="https://github.com/user-attachments/assets/9ed25e17-d906-4000-8c1f-7e6b74d3e728" />
+  <br />
+  <sub>Login</sub>
+</p>
 
-## Features
+<table>
+  <tr>
+    <td align="center" width="50%">
+      <img alt="Task list as seen by a developer" src="https://github.com/user-attachments/assets/59541180-eb05-4f39-834e-504b75c26c8b" />
+      <br />
+      <sub>Developer View</sub>
+    </td>
+    <td align="center" width="50%">
+      <img alt="Task list as seen by an admin" src="https://github.com/user-attachments/assets/e1991114-c409-4c1e-9988-04d66bfe8541" />
+      <br />
+      <sub>Admin View & Task Management</sub>
+    </td>
+  </tr>
+</table>
+
+## ✨ Features
 
 ### Admin
 - Create and delete projects
@@ -40,7 +79,7 @@ Built as the final assignment (seminar) of my Practical Software Engineering stu
 - Search tasks by title and filter by status and priority
 - Add and read comments on tasks
 
-## Task Workflow
+## 🔄 Task Workflow
 
 ```mermaid
 stateDiagram-v2
@@ -56,7 +95,7 @@ stateDiagram-v2
 - Admins can set any status at any time.
 - `approved` is a separate flag on a closed task, not a status value.
 
-## Tech Stack
+## 🧰 Tech Stack
 
 | Layer | Technologies |
 |---|---|
@@ -67,7 +106,7 @@ stateDiagram-v2
 | Testing | pytest, pytest-asyncio, httpx |
 | Data analysis | Jupyter, pandas, matplotlib |
 
-## Architecture
+## 🧱 Architecture
 
 ```
 ├── backend/
@@ -92,13 +131,17 @@ The backend has three layers:
 - **services**: enforces business rules and role permissions.
 - **dal**: the only layer that talks to the database.
 
-## Getting Started
+## 🚀 Getting Started
 
 ### Prerequisites
 - Python 3.12
 - Node.js and npm
 
-### Backend
+<details>
+<summary><b>Backend</b></summary>
+
+<br />
+
 Run these commands from the `backend` folder:
 
 ```bash
@@ -113,7 +156,13 @@ uvicorn project.server:app --reload
 - Interactive API docs (Swagger): http://127.0.0.1:8000/docs
 - The SQLite database (`backend/database.db`) is created automatically on first startup.
 
-### Create the demo admin
+</details>
+
+<details>
+<summary><b>Create the demo admin</b></summary>
+
+<br />
+
 **Start the server at least once first**, so the database tables exist. Then, from the `backend` folder, run:
 
 ```bash
@@ -124,7 +173,13 @@ Demo credentials, **for local development only**:
 - Email: `admin@admin.com`
 - Password: `admin123`
 
-### Frontend
+</details>
+
+<details>
+<summary><b>Frontend</b></summary>
+
+<br />
+
 ```bash
 cd frontend
 npm install
@@ -133,7 +188,9 @@ npm run dev
 
 The app runs at http://localhost:5173. It expects the API at `http://127.0.0.1:8000`, which is set in `frontend/src/services/api.ts`.
 
-## Running Tests
+</details>
+
+## 🧪 Running Tests
 
 From the `backend` folder:
 
@@ -147,11 +204,11 @@ The tests cover:
 - Password hashing
 - Task API behavior: admin vs. developer permissions, filtering, and requests without a token
 
-## Data Analysis
+## 📊 Data Analysis
 
 `analysis.ipynb` reads the SQLite database with pandas and charts task distribution by status and by assignee. It also calculates basic task statistics.
 
-## Known Limitations & Future Improvements
+## 🚧 Known Limitations & Future Improvements
 
 - **Secrets:** the JWT `SECRET_KEY` is defined in code. It should be loaded from environment variables.
 - **Registration:** the register endpoint accepts a `role` field, so the backend should force new users to `developer`.
@@ -159,10 +216,10 @@ The tests cover:
 - **CORS:** all origins are allowed. This should be restricted to known origins.
 - **Deployment:** the project currently runs locally only.
 
-## What I Learned
+## 💡 What I Learned
 
 TODO: written by me
 
-## Author
+## 👤 Author
 
 **Meytal Mazal Harush** · [github.com/Meytal-Mazal-Harush](https://github.com/Meytal-Mazal-Harush)
